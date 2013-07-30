@@ -11,20 +11,10 @@
 			<aside id="aside">
 				<div id="color_menu">
 					<div id="now_color">
+						<button onClick="addUl()">add_ul</button>
 					</div>
 					<div id="color">
-						<ul id="color_list">
-							<li class="sub_color"></li>
-							<li class="sub_color"></li>
-							<li class="sub_color"></li>
-							<li class="sub_color"></li>
-							<li class="sub_color"></li>
-							<li class="sub_color"></li>
-							<li class="sub_color"></li>
-							<li class="sub_color"></li>
-							<li class="sub_color"></li>
-							<li class="sub_color"></li>
-						</ul>
+						<div id="color_list"></div>
 						<div id="rgb">
 							<div class="sub_rgb">
 								<div class="letter_rgb">
@@ -61,6 +51,8 @@
 			console.log(arr[i].getAttribute("id"));
 		}
 		/* 3주차 과제 */
+
+		/*function addUl() {
 		var colorDiv = document.querySelector("#color");
 		colorDiv.innerHTML = "<ul id="color_list">
 									<li class="sub_color"></li>
@@ -74,5 +66,21 @@
 									<li class="sub_color"></li>
 									<li class="sub_color"></li>
 								</ul>"
+		}*/
+		function addUl() {
+			var colorDiv = document.querySelector("#color_list");
+			colorDiv.innerHTML = '<ul id="color_list">' +
+									'<li class="sub_color"></li>' +
+									'<li class="sub_color"></li>' +
+									'<li class="sub_color"></li>' +
+									'<li class="sub_color"></li>' +
+									'<li class="sub_color"></li>' +
+									'<li class="sub_color"></li>' +
+									'<li class="sub_color"></li>' +
+									'<li class="sub_color"></li>' +
+									'<li class="sub_color"></li>' +
+									'<li class="sub_color"></li>' +
+								'</ul>';
+		}
 	</script>
 </head>
