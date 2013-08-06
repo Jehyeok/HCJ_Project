@@ -1,7 +1,16 @@
-#color_list
+#color_list_div
+{
+	height :100px;
+	padding :0px;
+}
+
+#size_list
 {
 	list-style :none;
-	height :100px;
+	-webkit-padding-start :0px;
+	-webkit-margin-before :0px;
+	-webkit-margin-after :0px;
+	height :80px;
 	padding :0px;
 }
 
@@ -16,6 +25,7 @@
 {
 	width :1000px;
 	height :50px;
+
 	border :solid;
 }
 
@@ -24,6 +34,7 @@
 	width :200px;
 	height :500px;
 	float :left;
+
 	border :solid;
 }
 
@@ -38,9 +49,9 @@
 #color
 {
 	width :200px;
-	height :300px;
+	height :440px;
 	padding-top :0px;
-
+	
 	border :solid;
 }
 
@@ -49,6 +60,7 @@
 	width :780px;
 	height :500px;
 	float :left;
+	clear :right;
 
 	border :solid;
 }
@@ -62,13 +74,14 @@
 	border :solid;
 }
 
-.sub_color
+.sub_size
 {
 	width :30px;
 	height :30px;
-	margin :0px 0px 10px 3px;
+	margin :1px 0px 3px 3px;
 	float :left;
 	display :inline;
+	
 
 	border :solid;
 }
@@ -84,6 +97,7 @@
 	width :30px;
 	height :30px;
 	float :left;
+
 	border :solid;
 }
 
@@ -93,5 +107,52 @@
 	height :30px;
 	margin-left :5px;
 	float :left;
+
+	border :solid;
+}
+
+/*#myCanvas
+{
+	width :100%;
+	height :;
+}*/
+
+#draw_pen
+{
+	width :80px;
+	height :80px;
+	margin :5px;
+	float :left;
+
+	border :solid;
+}
+
+#draw_rect
+{
+	width :80px;
+	height :80px;
+	margin :5px;
+	float :left;
+
+	border :solid;
+}
+
+#draw_circle
+{
+	width :80px;
+	height :80px;
+	margin :5px;
+	float :left;
+
+	border :solid;
+}
+
+#pen_size
+{
+	width :80px;
+	height :80px;
+	margin :5px;
+	float :left;
+
 	border :solid;
 }
