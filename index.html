@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta charset="utf-8" />
-	<link rel="stylesheet" type="text/css" href="lib/default.css" />
+	<link rel="stylesheet" type="text/css" href="default.css" />
 	<script>
 		/* 3주차 과제 */
 		function add_list() {
@@ -42,7 +42,7 @@
 		}
 
 		function remove_list () {
-			var penSizeDiv = document.getElementById('pen_size');
+			var penSizeDiv = document.getElementById("pen_size");
 			penSizeDiv.innerHTML = "";
 			console.log("remove_list");
 		}
@@ -66,7 +66,7 @@
 		}
 
 		function getPosY(e) {
-			return e.pageY;
+			return e.pageY;	
 		}
 
 		startPosX = 0;
@@ -88,6 +88,20 @@
 			// console.log(startPosY);
 			// console.log(width);
 			// console.log(height);
+		}
+
+		function XMLRequest(request, url) {
+			request.open("GET", url, true);
+			request.onload = function() {
+				if (request.status == 200) {
+					result = request.responseText;
+					obj = JSON.parse(result);
+					console.log(result);
+					document.writeln(result);
+					document.writeln(obj.name);
+				}
+			}
+			return request;
 		}
 
 		window.addEventListener('load', function() {
@@ -151,7 +165,6 @@
 
 		    	drawCircleDiv = document.getElementById('draw_circle');
 		    	drawCircleDiv.addEventListener('click', ev_tool_change, false);
-
 		    	// default
 		    	tool = new tools['draw_pen']();
 			    // Attach the mousedown, mousemove and mouseup event listeners.
@@ -292,6 +305,18 @@
 			}
 
 		init();
+
+		var request;
+		var url = "http://ui.nhnnext.org/phpcode/response_cors.php";
+
+		if (typeof XMLHttpRequest !== "undefined") {
+			request = new XMLHttpRequest();
+		} else if (typeof XDomainRequest !== "undefined") {
+			request = new XDomainRequest();
+		}
+
+		request = XMLRequest(request, url);
+		request.send(null);
 
 		}, false);
 	</script>
