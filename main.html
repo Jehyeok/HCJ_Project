@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" type="text/css" href="responsive.css" />
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script type="text/javascript" src="lib/jquery.jcarousel.js"></script>
+</head>
+<body>
+	<div id="container">
+		<header id="header"><img src="lib/banner.png" /></header>
+		<nav id="nav">
+			<ul>
+				<li><a href="" role="button">HOME</a></li>
+				<li><a href="">MY</a></li>
+				<li><a href="">ORDER</a></li>
+				<li><a href="">HELP</a></li>
+				<li><a href="">SEARCH</a></li>
+				<li><a href="">SORT</a></li>
+			</ul>
+		</nav>
+		<section id="section">
+			<div hidden class="book">
+				<div class="book_img_div"><img src="lib/1_book.jpg"/></div>
+				<p class="description">진정한 자유와 행복에 이르는 방법의 하나로 목수정은 월경의 실천을 제안한다. 국경 이상으로 개인적ㆍ구조적ㆍ사회적ㆍ제도적으로 사람을 길들이려 하는 각종 편견, 도덕, 관습, 규범, 문명 등을 두루 포괄하는 경계를 넘어선 뒤 비로소 자아를 만나고, 타인을 그리고 세상을 이해하게 되는 일의 즐거움을 역설한다. 『월경독서』는 저자를 각성케 한 질문들과 깊은 영감을 선사한 지성들을 특유의 호소력 짙은 문장으로 소개한다.</p>
+			</div>
+			<div class="book">
+				<div class="book_img_div"><img src="lib/2_book.jpg"/></div>
+				<p class="description">우리는 흔히 이웃나라 일본을 두고 가깝고도 먼 나라라고 합니다. 우리와 일본은 독도 문제, 위안부 문제 등으로 끊임없이 부딪히고 있습니다. 하지만 이렇게 쭉 사이가 좋지 않았던 것은 아닙니다. 정기적으로 통신사를 보내어 신의를 다지고 문화를 교류하던 시절도 있었답니다. 바로 조선 시대 때 이야기인데요.</p>
+			</div>
+			<div class="book">
+				<div class="book_img_div"><img src="lib/3_book.jpg"/></div>
+				<p class="description">이 책에서는 아기가 첫 열두 달 동안 겪게 되는 신체, 인지, 사회성 발달과정을 주 단위로 꼼꼼하게 짚어주고 있다. 또 초보 부모가 알아야 할 아기의 상태와 부모의 마음가짐, 육아 전략 등을 알려준다. 엄마아빠는 아기의 월령에 맞는 내용을 찾아 평균적인 발단단계를 이해하는 것은 물론 그것을 기준으로 다음 단계를 예측할 수 있다.</p>
+			</div>
+			<div class="book">
+				<div class="book_img_div"><img src="lib/4_book.jpg"/></div>
+				<p class="description">이 작품에는 정말 다양한 고양이들이 등장한다. ‘혼자 있는 게 무섭지 않다’고 큰소리치지만 마음 한구석에선 다시 버려질까 봐 두려워하는 얼굴의 길고양이, 소리 없이 우는 법을 터득한 고양이, 성묘가 되었지만 다시 아기 고양이처럼 주인에게 사랑받고 싶어하는 고양이……. 이런 다양한 고양이들을 통해 작가인 야마다 무라사키는 여성의 여러 면들을 지그소 퍼즐처럼 완성해간다. 고양이들의 다채로운 무늬만큼이나 다양한 사랑의 무늬들을 보면서 독자들은 공감하고 위안을 얻을 수 있을 것이다.</p>
+			</div>
+			<div class="book">
+				<div class="book_img_div"><img src="lib/5_book.jpg"/></div>
+				<p class="description">야마자키 마리가 중동 시리아의 다마스쿠스에서 살던 시절, 우연히 만난 아기 길고양이 골룸과의 인연을 그린 코믹에세이이다. 길에서 살던 아기 고양이가 어떻게 가족과 집을 떠나 인간들과 함께 살게 되었으며, 어쩌다 ‘골룸’이라는 이름을 갖게 되었는지, 그 과정을 유쾌하고 사랑스럽게 그려내었다. 아기 고양이 골룸의 시선으로 본 인간과 인간 세상이 신선하고 재미있게 그려지며, 배경이 된 다마스쿠스의 이색적인 풍경이 읽는 즐거움을 더한다.</p>
+			</div>
+		</section>
+		<div id="carousel">
+			<div id="carousel_prev_btn"></div>
+			<div id="carousel_pages">
+				<div class="slide_active"><img src="lib/1_bg.jpeg" /></div>
+				<div class="slide"><img src="lib/2_bg.jpeg" /></div>
+				<div class="slide"><img src="lib/3_bg.jpeg" /></div>
+			</div>
+			<div id="carousel_next_btn"></div>
+		</div>
+	<!-- 	<div id="carousel">
+			<div id="jCarousel">
+				<div id="jCarousel-list">
+					<div class="jCarousel-item"><img src="lib/1_bg.jpeg" /></div>
+					<div class="jCarousel-item"><img src="lib/2_bg.jpeg" /></div>
+					<div class="jCarousel-item"><img src="lib/3_bg.jpeg" /></div>
+				</div>
+			</div>
+			<a class="jcarousel-prev" href="#">Prev</a>
+	    	<a class="jcarousel-next" href="#">Next</a>
+    	</div> -->
+		<footer id="footer">© 2013 Jehyeok Hyun HCJ Project</footer>
+	</div>
+</body>
+<script>
+	// var MoveBookDiv = {
+	// 	booksDiv : document.querySelectorAll('.book'),
+	// 	bookDivMouseEventInit : function(e) {
+	// 		console.log('bookDivMouseEventInit');
+	// 		for (i = 0, len = this.booksDiv.length; i < len; i++) {
+	// 			this.booksDiv[i].addEventListener('mousedown', this.bookDivMouseDown.bind(this), false);
+	// 		}
+	// 	},
+	// 	bookDivMouseDown : function(e) {
+	// 		console.log('bookDivMouseDown');
+	// 		console.log(e.target.innerHTML);
+	// 		e.target.addEventListener('mousemove', this.bookDivMouseMove.bind(this), false);
+	// 		e.target.addEventListener('mouseup', this.bookDivMouseUp.bind(this), false);
+	// 	},
+	// 	bookDivMouseMove : function(e) {
+	// 		console.log('bookDivMouseMove');
+	// 		console.log(e.target);
+	// 		console.log(e.target.innerHTML);
+	// 		e.target.removeEventListener('mousedown', this.bookDivMouseDown.bind(this), false);
+	// 	},
+	// 	bookDivMouseUp : function(e) {
+	// 		console.log('bookDivMouseUp');
+	// 		console.log(e.target.innerHTML);
+	// 		e.target.removeEventListener('mousemove', this.bookDivMouseMove, false);
+	// 	}
+	// }
+	// MoveBookDiv.bookDivMouseEventInit();
+
+	var Carousel = {
+		carouselPrevBtnDiv : document.querySelector('#carousel_prev_btn'),
+		carouselNextBtnDiv : document.querySelector('#carousel_next_btn'),
+		carouselActivePageDiv : document.querySelector('.slide_active'),
+		carouselInit : function() {
+			this.carouselPrevBtnDiv.addEventListener('click', this.slideToPrevPage.bind(this), false);
+			this.carouselNextBtnDiv.addEventListener('click', this.slideToNextPage.bind(this), false);
+		},
+		slideToPrevPage : function() {
+			var prevSiblingDiv = this.carouselActivePageDiv.previousElementSibling;
+			if (prevSiblingDiv !== null) {
+				this.carouselActivePageDiv.className = 'slide';
+				prevSiblingDiv.className = 'slide_active';
+				this.carouselActivePageDiv = prevSiblingDiv;
+			}
+		},
+		slideToNextPage : function() {
+			var nextSiblingDiv = this.carouselActivePageDiv.nextElementSibling;
+			if (nextSiblingDiv !== null) {
+				this.carouselActivePageDiv.className = 'slide';
+				nextSiblingDiv.className = 'slide_active';
+				this.carouselActivePageDiv = nextSiblingDiv;
+			}
+		}
+	}
+
+	Carousel.carouselInit();
+	
+	$(function() {
+		$('#jCarousel').jcarousel({
+			'list' : '#jCarousel-list',
+			'items' : '.jCarousel-item',
+			'animation' : 'slow',
+			'transitions' : true,
+			'wrap' : 'circular',
+			'rtl' : true
+		})
+	})
+
+	$('.jcarousel-prev').jcarouselControl({
+        target: '-=1',
+        carousel: carousel
+    });
+
+    $('.jcarousel-next').jcarouselControl({
+        target: '+=1',
+        carousel: carousel
+    });
+</script>
+</html>

@@ -5,91 +5,7 @@
 	<link rel="stylesheet" type="text/css" href="default.css" />
 	<script>
 		/* 3주차 과제 */
-		function add_list() {
-			var color_list_div = document.querySelector("#color_list_div");
-			var li_string = '<li class="sub_color"></li>'
-			color_list_div.innerHTML = '<ul id="color_list">' +
-									li_string + li_string + li_string + li_string +
-									li_string + li_string + li_string + li_string +
-									li_string + li_string +			
-								'</ul>';
-
-			var color_list_arr = document.querySelectorAll('li');
-			for (i = 0, len = color_list_arr.length; i < len; i++) {
-				color_list_arr[i].addEventListener('click', remove_list, false);
-			}
-		}
-
-		function show_size () {
-			var penSizeDiv = document.querySelector("#pen_size");
-			var penShowSizeDiv = document.createElement('div');
-			
-			penShowSizeDiv.style.width = '80px';
-			penShowSizeDiv.style.height = '60px';
-
-			penSizeDiv.appendChild(penShowSizeDiv);
-
-			var li_string = '<li class="sub_size"></li>'
-
-			penShowSizeDiv.innerHTML = '<ul id="size_list">' +
-									li_string + li_string +li_string +li_string
-								'</ul>';
-
-			var size_list_arr = document.querySelectorAll('li');
-			for (i = 0, len = size_list_arr.length; i < len; i++) {
-				size_list_arr[i].addEventListener('click', remove_list, false);
-			}
-		}
-
-		function remove_list () {
-			var penSizeDiv = document.getElementById("pen_size");
-			penSizeDiv.innerHTML = "";
-			console.log("remove_list");
-		}
-
-		function alertTest(e) {
-				alert("hi~~");
-				console.log(e.target.tagName, e.type, e.clientX);
-				e.target.style.backgroundColor = "red";
-				debugger;
-		}
-
-		function keydownTest(e) {
-			alert(String.fromCharCode(e.keyCode));
-			debugger;
-		}
-
-		function getPosX(e) {
-			startPosX = e.pageX;
-			console.log("dd");
-			// return e.pageX;
-		}
-
-		function getPosY(e) {
-			return e.pageY;	
-		}
-
-		startPosX = 0;
-		startPosY = 0;
-
-		function drawRect(canvas) {
-			// var startPosX = canvas.addEventListener('mousedown', getPosX, false);
-			canvas.addEventListener('mousedown', getPosX, false);
-			// var startPosY = canvas.addEventListener('mousedown', getPosY, false);
-			// var endPosX = canvas.addEventListener('mouseup', getPosX, false);
-			// var endPosY = canvas.addEventListener('mouseup', getPosY, false);
-			// var width = getAbs(startPosX - endPosX);
-			// var height = getAbs(startPosY - endPosY);
-
-			// var context = canvas.getContext('2d');
-			// context.beginPath();
-			// context.fillRect(startPosX, startPosY, width, height);
-			console.log(startPosX);
-			// console.log(startPosY);
-			// console.log(width);
-			// console.log(height);
-		}
-
+		// jisu.youn@nhn.com
 		function XMLRequest(request, url) {
 			request.open("GET", url, true);
 			request.onload = function() {
@@ -105,219 +21,168 @@
 		}
 
 		window.addEventListener('load', function() {
-			// var arr = document.querySelectorAll("#aside");
-			// console.log(arr.length);
-			// for (i = 0 ; i < arr.length ; i++) {
-			// 	console.log(arr[i].getAttribute("id"));
-			// }
+			var Size = {
+				penSizeDiv : document.querySelector("#pen_size"),
+				showSizeDiv : function (e) {
+					var penShowSizeDiv = document.createElement('div');
+					penShowSizeDiv.style.width = '80px';
+					penShowSizeDiv.style.height = '60px';
+					penShowSizeDiv.id = 'size_menu';
+					this.penSizeDiv.appendChild(penShowSizeDiv);
+
+					var li_string = '<li class="sub_size"></li>'
+					penShowSizeDiv.innerHTML = '<ul id="size_list">' +
+											li_string + li_string +li_string +li_string
+										'</ul>';
+
+					var size_list_arr = document.querySelectorAll('li');
+					for (i = 0, len = size_list_arr.length; i < len; i++) {
+						size_list_arr[i].innerHTML = i;
+					}
+					this.penSizeDiv.removeEventListener('click', this.showSizeDiv, false);
+					this.penSizeDiv.addEventListener('click', this.delSizeDiv.bind(this), false);
+				},
+				delSizeDiv : function (e) {
+					// console.log(this.penSizeDiv);
+					this.penSizeDiv.innerHTML = "";
+					this.penSizeDiv.addEventListener('click', this.showSizeDiv.bind(this), false);
+					this.penSizeDiv.removeEventListener('click', this.delSizeDiv.bind(this), false);
+				}
+			}
+
+			function Pen(context) {
+				this.moveTo = function (pos) {
+					context.beginPath();
+					context.moveTo(pos.x, pos.y);
+				}
+				this.draw = function (pos) {
+					context.lineTo(pos.x, pos.y);
+					context.stroke();
+				}
+				this.setLineWidth = function(width) {
+					context.lineWidth = width;
+				}
+			}
+
+			function Rect(context) {
+				var startPos;
+				var endPos;
+				this.moveTo = function (pos) {
+					context.beginPath();
+					// context.moveTo(pos);
+					startPos = pos;
+				}
+				this.draw = function (pos) {
+					endPos = pos;
+					var startX = Math.min(startPos.x, endPos.x);
+					var startY = Math.min(startPos.y, endPos.y);
+					var width = Math.abs(endPos.x - startPos.x);
+					var height = Math.abs(endPos.y - startPos.y);
+					
+					context.strokeRect(startX, startY, width, height);
+					// context.clearRect(startX, startY, width, height);
+					context.closePath();
+					console.log('dd');
+				}
+			}
+
+			function Circle(context) {
+				var startPos;
+				var endPos;
+				this.moveTo = function (pos) {
+					context.beginPath();
+					// context.moveTo(pos);
+					startPos = pos;
+				}
+				this.draw = function (pos) {
+					endPos = pos;
+					var startX = Math.min(startPos.x, endPos.x);
+					var startY = Math.min(startPos.y, endPos.y);
+					var width = Math.abs(endPos.x - startPos.x);
+					var height = Math.abs(endPos.y - startPos.y);
+					var radius = Math.min(width, height) / 2;
+
+					context.arc(startX + radius, startY + radius, radius, 0, 2 * Math.PI, false);
+
+					context.stroke();
+				}
+			}
+
+			function ToolHandler() {
+				var tools = new Tool();
+				var canvas = document.getElementById('myCanvas');
+				var context = canvas.getContext('2d');
+				this.penInit = function () {
+					tools.setTool(new Pen(context));
+				}
+				this.rectInit = function () {
+					tools.setTool(new Rect(context));
+				}
+				this.circleInit = function () {
+					tools.setTool(new Circle(context));
+				}
+				this.getContext = function () {
+					return context;
+				}
+			}
+
+			function Tool() {
+				var canvas = document.getElementById('myCanvas');
+				var context = canvas.getContext('2d');
+				var tool;
+
+				function getPos(e) {
+					return {x : e.offsetX, y : e.offsetY};
+				}
+				this.setTool = function (_tool) {
+					tool = _tool;
+					canvas.addEventListener('mousedown', toolDown, false);
+				}
+				this.getTool = function () {
+					return tool;
+				}
+				var toolDown = function (e) {
+					tool.moveTo(getPos(e));
+					canvas.addEventListener('mousemove', toolMove, false);
+					canvas.addEventListener('mouseup', toolUp, false);
+				}
+				var toolMove = function (e) {
+					tool.draw(getPos(e));
+					canvas.removeEventListener('mousedown', toolDown, false);
+				}
+				var toolUp = function (e) {
+					canvas.removeEventListener('mousemove', toolMove, false);
+					canvas.addEventListener('mousedown', toolDown, false);
+				}
+				var changeSize = function () {
+					console.log(Size.showSizeDiv);
+				}
+			}
 			
+			/* tool setting */
+			var tools = new ToolHandler();
+			var penDiv = document.getElementById('draw_pen');
+			penDiv.addEventListener('click', tools.penInit, false);
+			var rectDiv = document.getElementById('draw_rect');
+			rectDiv.addEventListener('click', tools.rectInit, false);
+			var circleDiv = document.getElementById('draw_circle');
+			circleDiv.addEventListener('click', tools.circleInit, false);
+
+			/* show menu */
 			var penSizeDiv = document.getElementById('pen_size');
-			penSizeDiv.addEventListener('click', show_size, false);
+			penSizeDiv.addEventListener('click', Size.showSizeDiv.bind(Size), false);
 
+			var request;
+			var url = "http://ui.nhnnext.org/phpcode/response_cors.php";
 
-			// var li_list = document.getElementsByTagName('li');
-			// for( i = 0; i < li_list.length; i++) {
-			// 	console.log(li_list.className);
-			// }
-
-			clickDiv = document.getElementById('click');
-			clickDiv.addEventListener('click', alertTest, false);
-
-			// var css_attr = document.defaultView.getComputedStyle(clickDiv)
-			// console.log(css_attr.display); // block
-
-			// if (css_attr.display == 'block') clickDiv.display = 'none';
-			// else clickDiv.display = 'block';
-
-			// var keydown_test_div = document.getElementById('keydown_test');
-			// keydown_test_div.addEventListener('keydown', keydownTest, false);
-
-			// var canvas = document.getElementById('myCanvas');
-			
-			// var context = canvas.getContext('2d');
-			// context.beginPath();
-			// context.moveTo(10, 10);
-			// context.lineTo(50, 50);
-			// context.closePath();
-			// context.moveTo(60, 60);
-			// context.lineTo(100, 100);
-			// context.stroke();
-
-			// var drawRectDiv = document.getElementById('draw_rect');
-			// draw_rect.addEventListener('click', drawRect(canvas), false);
-
-			var canvas, context;
-
-			var tool;
-			// var tool_default = 'rect';
-
-		  	function init () {
-			    // Find the canvas element.
-		    	canvas = document.getElementById('myCanvas');
-		    	context = canvas.getContext('2d');
-		    	
-		    	// Pencil tool instance.
-		    	drawRectDiv = document.getElementById('draw_rect');
-		    	drawRectDiv.addEventListener('click', ev_tool_change, false);
-
-		    	drawPenDiv = document.getElementById('draw_pen');
-		    	drawPenDiv.addEventListener('click', ev_tool_change, false);
-
-		    	drawCircleDiv = document.getElementById('draw_circle');
-		    	drawCircleDiv.addEventListener('click', ev_tool_change, false);
-		    	// default
-		    	tool = new tools['draw_pen']();
-			    // Attach the mousedown, mousemove and mouseup event listeners.
-			    canvas.addEventListener('mousedown', ev_canvas, false);
-			    canvas.addEventListener('mousemove', ev_canvas, false);
-			    canvas.addEventListener('mouseup',   ev_canvas, false);
+			if (typeof XMLHttpRequest !== "undefined") {
+				request = new XMLHttpRequest();
+			} else if (typeof XDomainRequest !== "undefined") {
+				request = new XDomainRequest();
 			}
 
-		  // This painting tool works like a drawing pencil which tracks the mouse 
-		  // movements.
-
-		  	function ev_tool_change (ev) {
-		  		if (tools[this.id]) {
-		  			tool = new tools[this.id]();
-		  		}
-		  	}
-
-		  	var tools = {};
-
-			tools.draw_pen = function () {
-				var tool = this;
-			    this.started = false;
-
-			    // This is called when you start holding down the mouse button.
-			    // This starts the pencil drawing.
-			    this.mousedown = function (ev) {
-			        context.beginPath();
-			        context.moveTo(ev._x, ev._y);
-			        tool.started = true;
-				};
-
-		    // This function is called every time you move the mouse. Obviously, it only 
-		    // draws if the tool.started state is set to true (when you are holding down 
-		    // the mouse button).
-			    this.mousemove = function (ev) {
-			      if (tool.started) {
-			        context.lineTo(ev._x, ev._y);
-			        context.stroke();
-			      }
-			    };
-
-		    // This is called when you release the mouse button.
-			    this.mouseup = function (ev) {
-			      if (tool.started) {
-			        tool.mousemove(ev);
-			        tool.started = false;
-			      }
-			    };
-		  	}
-
-		  	tools.draw_rect = function () {
-		  		var tool = this;
-		  		this.started = false;
-
-		  		this.mousedown = function (ev) {
-			      tool.started = true;
-			      tool.x0 = ev._x;
-			      tool.y0 = ev._y;
-			    };
-
-			    this.mousemove = function (ev) {
-			      if (!tool.started) {
-			        return;
-			      }
-
-			      var x = Math.min(ev._x,  tool.x0),
-			          y = Math.min(ev._y,  tool.y0),
-			          w = Math.abs(ev._x - tool.x0),
-			          h = Math.abs(ev._y - tool.y0);
-
-			      context.clearRect(0, 0, canvas.width, canvas.height);
-
-			      if (!w || !h) {
-			        return;
-			      }
-
-			      context.strokeRect(x, y, w, h);
-			    };
-
-			    this.mouseup = function (ev) {
-			      if (tool.started) {
-			        tool.mousemove(ev);
-			        tool.started = false;
-			      }
-			    };
-		  	}
-
-		  	tools.draw_circle = function () {
-		  		var tool = this;
-		  		this.started = false;
-
-		  		this.mousedown = function (ev) {
-			      tool.started = true;
-			      tool.x0 = ev._x;
-			      tool.y0 = ev._y;
-			      context.beginPath();
-			    };
-
-			    this.mousemove = function (ev) {
-				    if (!tool.started) {
-				    	return;
-				    }
-
-				    var x = Math.min(ev._x,  tool.x0),
-				        y = Math.min(ev._y,  tool.y0),
-				        w = Math.abs(ev._x - tool.x0),
-				        h = Math.abs(ev._y - tool.y0);
-
-			    	context.clearRect(0, 0, canvas.width, canvas.height);
-
-			        if (!w || !h) {
-			        	return;
-			        }
-
-			        // context.strokeRect(x, y, w, h);
-			        context.arc(x, y, w/2, 0, 2 * Math.PI, false);
-			        context.stroke();
-			    };
-
-			    this.mouseup = function (ev) {
-			    	if (tool.started) {
-			        	tool.mousemove(ev);
-			        	tool.started = false;
-			    	}
-			    };
-		  	}
-		  // The general-purpose event handler. This function just determines the mouse 
-		  // position relative to the canvas element.
-		 	function ev_canvas (ev) {
-			    ev._x = ev.offsetX;
-			    ev._y = ev.offsetY;
-
-			    // Call the event handler of the tool.
-			    var func = tool[ev.type];
-			    if (func) {
-			      func(ev);
-			    }
-			}
-
-		init();
-
-		var request;
-		var url = "http://ui.nhnnext.org/phpcode/response_cors.php";
-
-		if (typeof XMLHttpRequest !== "undefined") {
-			request = new XMLHttpRequest();
-		} else if (typeof XDomainRequest !== "undefined") {
-			request = new XDomainRequest();
-		}
-
-		request = XMLRequest(request, url);
-		request.send(null);
-
+			// request = XMLRequest(request, url);
+			// request.send(null);
 		}, false);
 	</script>
 </head>
@@ -367,9 +232,5 @@
 		</div>
 		<footer id="footer">copyright</footer>
 	</div>
-	<div id="click">click</div>
-	<form>
-		<input type="text" id="keydown_test" />
-	</form>
 </body>
 </html>
